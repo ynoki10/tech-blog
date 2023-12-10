@@ -31,5 +31,6 @@
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "[markdown]": {
     "files.trimTrailingWhitespace": false
-  }
+  },
+  "markuplint.enable": true
 }
