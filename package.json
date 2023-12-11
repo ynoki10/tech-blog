@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "markuplint": "markuplint \"./**/*.tsx\""
+    "markuplint": "markuplint \"./**/*.tsx\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "next": "14.0.4",
@@ -28,6 +29,8 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-tailwindcss": "^3.13.0",
     "eslint-plugin-unused-imports": "^3.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
     "markuplint": "^3.15.0",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",
