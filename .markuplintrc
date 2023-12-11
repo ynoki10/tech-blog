@@ -1,6 +1,6 @@
 {
   "extends": [
-    "markuplint:recommended"
+    "markuplint:recommended-react"
   ],
   "specs": {
     ".tsx$": "@markuplint/react-spec"
