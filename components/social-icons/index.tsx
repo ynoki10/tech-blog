@@ -24,9 +24,7 @@ export default function SocialIcon({ kind, href }: SocialIconProps) {
       href={href}
     >
       <span className="sr-only">{kind}</span>
-      <SocialSvg
-        className={`h-6 w-6 fill-current text-gray-700 hover:text-gray-600 dark:text-gray-200 dark:hover:text-gray-300`}
-      />
+      <SocialSvg className={`h-6 w-6 fill-current text-gray-700 hover:text-gray-600`} />
     </a>
   );
 }
