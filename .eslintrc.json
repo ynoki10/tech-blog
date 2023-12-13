@@ -12,6 +12,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["next.config.js"],
   "rules": {
     "@typescript-eslint/no-unused-vars": [
       "error",
