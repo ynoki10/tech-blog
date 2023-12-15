@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import Link from '@/components/Link';
 import MDXRenderer from '@/components/MDXRenderer';
+import PageTitle from '@/components/PageTitle';
 
 import siteMetadata from '@/data/siteMetadata';
 import { Article, allArticles } from 'contentlayer/generated';
@@ -75,7 +76,7 @@ export default function Page({ params }: { params: { slug: string[] } }) {
               </div>
             </dl>
             <div>
-              <h1>{post.title}</h1>
+              <PageTitle>{post.title}</PageTitle>
             </div>
           </div>
         </header>
