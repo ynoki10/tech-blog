@@ -3,32 +3,28 @@ import Link from 'next/link';
 
 import { allArticles, Article } from 'contentlayer/generated';
 
-function ArticleCard(article: Article) {
+function ArticleCard(post: Article) {
   return (
     <div className="mb-8">
       <h2 className="mb-1 text-xl">
-        <Link href={article.url} className="text-blue-700 hover:text-blue-900 dark:text-blue-400">
-          {article.title}
+        <Link href={post.path} className="text-blue-700 hover:text-blue-900 dark:text-blue-400">
+          {post.title}
         </Link>
       </h2>
-      <time dateTime={article.date} className="mb-2 block text-xs text-gray-600">
-        {format(parseISO(article.date), 'LLLL d, yyyy')}
+      <time dateTime={post.date} className="mb-2 block text-xs text-gray-600">
+        {format(parseISO(post.date), 'LLLL d, yyyy')}
       </time>
-      <div
-        className="text-sm [&>*:last-child]:mb-0 [&>*]:mb-3"
-        dangerouslySetInnerHTML={{ __html: article.body.html }}
-      />
     </div>
   );
 }
 
 export default function Home() {
-  const articles = allArticles.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)));
+  const posts = allArticles.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)));
 
   return (
-    <div className="mx-auto max-w-xl py-8">
-      <h1 className="mb-8 text-center text-2xl font-black">Next.js + Contentlayer Example</h1>
-      {articles.map((article, idx) => (
+    <div className="mx-auto max-w-3xl py-8">
+      <h1 className="mb-8 text-center text-2xl font-black">よしのきのブログ</h1>
+      {posts.map((article, idx) => (
         <ArticleCard key={idx} {...article} />
       ))}
     </div>

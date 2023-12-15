@@ -31,6 +31,9 @@ devDependencies:
   '@markuplint/react-spec':
     specifier: ^3.13.0
     version: 3.13.0(@markuplint/ml-core@3.15.0)
+  '@types/mdx':
+    specifier: ^2.0.10
+    version: 2.0.10
   '@types/node':
     specifier: ^20.10.4
     version: 20.10.4
@@ -1370,7 +1373,6 @@ packages:
 
   /@types/mdx@2.0.10:
     resolution: {integrity: sha512-Rllzc5KHk0Al5/WANwgSPl1/CwjqCy+AZrGd78zuK+jO9aDM6ffblZ+zIjgPNAaEBmlO0RYDvLNh7wD0zKVgEg==}
-    dev: false
 
   /@types/meow@6.0.0:
     resolution: {integrity: sha512-RzAdIcBCzg6A61SjQGmQHsJ6nEIsGdd2cAw/MAdBwwI0SZg4iGbtpto44BkY6Vq8SDsiqcCV2DowmHj8v+K1gw==}
