@@ -8,8 +8,8 @@ import PageTitle from '@/components/PageTitle';
 import siteMetadata from '@/data/siteMetadata';
 import { Article, allArticles } from 'contentlayer/generated';
 
-export const generateMetadata = ({ params }: { params: { slug: string[] } }) => {
-  const slug = decodeURI(params.slug.join('/'));
+export const generateMetadata = ({ params }: { params: { slug: string } }) => {
+  const slug = params.slug;
   const post = allArticles.find((post) => post.slug === slug);
   if (!post) throw new Error(`Post not found for slug: ${slug}`);
   const publishedAt = new Date(post.date).toISOString();
@@ -37,7 +37,7 @@ export const generateMetadata = ({ params }: { params: { slug: string[] } }) => 
 };
 
 export const generateStaticParams = () => {
-  const paths = allArticles.map((p) => ({ slug: p.slug.split('/') }));
+  const paths = allArticles.map((p) => ({ slug: p.slug }));
   return paths;
 };
 
@@ -48,8 +48,8 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
   day: 'numeric',
 };
 
-export default function Page({ params }: { params: { slug: string[] } }) {
-  const slug = decodeURI(params.slug.join('/'));
+export default function Page({ params }: { params: { slug: string } }) {
+  const slug = params.slug;
   const sortedArticles = allArticles.sort((a, b) =>
     compareDesc(new Date(a.date), new Date(b.date)),
   );
