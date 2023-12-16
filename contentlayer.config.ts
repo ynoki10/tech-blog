@@ -1,6 +1,11 @@
+import { writeFileSync } from 'fs';
+
 import { ComputedFields, defineDocumentType, makeSource } from 'contentlayer/source-files';
 
 import siteMetadata from './data/siteMetadata';
+import { tags } from './data/tags';
+
+import type { Article as ArticleType } from '@/.contentlayer/generated';
 
 const computedFields: ComputedFields = {
   slug: {
@@ -24,6 +29,12 @@ export const Article = defineDocumentType(() => ({
   fields: {
     title: { type: 'string', required: true },
     date: { type: 'date', required: true },
+    tags: {
+      type: 'list',
+      of: { type: 'enum', options: tags.map((tag) => tag.label) },
+      default: [],
+      required: true,
+    },
     lastmod: { type: 'date' },
     summary: { type: 'string' },
   },
@@ -44,10 +55,22 @@ export const Article = defineDocumentType(() => ({
   },
 }));
 
+function createTagCount(allArticles: ArticleType[]) {
+  const tagsWithCount = tags.map((tag) => {
+    const count = allArticles.filter((article) => article.tags.includes(tag.label)).length;
+    return { ...tag, count };
+  });
+  writeFileSync('./app/tag-data.json', JSON.stringify(tagsWithCount));
+}
+
 export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Article],
   mdx: {
     cwd: process.cwd(),
+  },
+  onSuccess: async (importData) => {
+    const { allArticles } = await importData();
+    createTagCount(allArticles);
   },
 });
