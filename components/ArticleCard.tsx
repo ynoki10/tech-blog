@@ -3,11 +3,11 @@ import Link from 'next/link';
 
 import Tag from '@/components/Tag';
 
-import { tags } from '@/data/tags';
+import { TAGS } from '@/data/tags';
 import { Article } from 'contentlayer/generated';
 
 export default function ArticleCard(post: Article) {
-  const postTags = tags.filter((tag) => post.tags?.includes(tag.label));
+  const postTags = TAGS.filter((tag) => post.tags?.includes(tag.label));
 
   return (
     <div className="mb-8">

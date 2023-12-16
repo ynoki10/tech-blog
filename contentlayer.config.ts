@@ -3,7 +3,7 @@ import { writeFileSync } from 'fs';
 import { ComputedFields, defineDocumentType, makeSource } from 'contentlayer/source-files';
 
 import siteMetadata from './data/siteMetadata';
-import { tags } from './data/tags';
+import { TAGS } from './data/tags';
 
 import type { Article as ArticleType } from '@/.contentlayer/generated';
 
@@ -31,7 +31,7 @@ export const Article = defineDocumentType(() => ({
     date: { type: 'date', required: true },
     tags: {
       type: 'list',
-      of: { type: 'enum', options: tags.map((tag) => tag.label) },
+      of: { type: 'enum', options: TAGS.map((tag) => tag.label) },
       default: [],
       required: true,
     },
@@ -56,7 +56,7 @@ export const Article = defineDocumentType(() => ({
 }));
 
 function createTagCount(allArticles: ArticleType[]) {
-  const tagsWithCount = tags.map((tag) => {
+  const tagsWithCount = TAGS.map((tag) => {
     const count = allArticles.filter((article) => article.tags.includes(tag.label)).length;
     return { ...tag, count };
   });

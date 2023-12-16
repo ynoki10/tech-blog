@@ -7,7 +7,7 @@ import PageTitle from '@/components/PageTitle';
 import Tag from '@/components/Tag';
 
 import siteMetadata from '@/data/siteMetadata';
-import { tags } from '@/data/tags';
+import { TAGS } from '@/data/tags';
 import { Article, allArticles } from 'contentlayer/generated';
 
 export const generateMetadata = ({ params }: { params: { slug: string } }) => {
@@ -57,7 +57,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   );
   const postIndex = sortedArticles.findIndex((p) => p.slug === slug);
   const post = allArticles.find((p) => p.slug === slug) as Article;
-  const postTags = tags.filter((tag) => post.tags?.includes(tag.label));
+  const postTags = TAGS.filter((tag) => post.tags?.includes(tag.label));
 
   if (postIndex === -1) {
     return notFound();

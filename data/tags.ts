@@ -1,4 +1,4 @@
-export const tags = [
+export const TAGS = [
   { label: 'JavaScript', slug: 'javascript' },
   { label: 'TypeScript', slug: 'typescript' },
   { label: 'React', slug: 'react' },
@@ -9,7 +9,7 @@ export const tags = [
   { label: 'デザイン', slug: 'design' },
 ] as const;
 
-export type Tag = (typeof tags)[number];
+export type Tag = (typeof TAGS)[number];
 export type TagWithCount = Tag & { count: number };
 
 export type TagsWithCount = TagWithCount[];

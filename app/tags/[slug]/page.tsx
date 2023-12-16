@@ -2,13 +2,13 @@ import { notFound } from 'next/navigation';
 
 import ArticleCard from '@/components/ArticleCard';
 
-import { tags } from '@/data/tags';
+import { TAGS } from '@/data/tags';
 import { genPageMetadata } from 'app/seo';
 import { allArticles } from 'contentlayer/generated';
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
   const slug = params.slug;
-  const label = tags.find((tag) => tag.slug === slug)?.label;
+  const label = TAGS.find((tag) => tag.slug === slug)?.label;
   return genPageMetadata({
     title: label ? `${label}に関する記事` : 'タグが見つかりません',
     description: label ? `${label}に関する記事一覧です。` : `タグが見つかりません。`,
@@ -16,13 +16,13 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 }
 
 export const generateStaticParams = () => {
-  const paths = tags.map((t) => ({ slug: t.slug }));
+  const paths = TAGS.map((t) => ({ slug: t.slug }));
   return paths;
 };
 
 export default function TagPage({ params }: { params: { slug: string } }) {
   const slug = params.slug;
-  const tag = tags.find((tag) => tag.slug === slug);
+  const tag = TAGS.find((tag) => tag.slug === slug);
   if (!tag) return notFound();
 
   const filteredPosts = allArticles.filter((post) => post.tags?.includes(tag.label));
