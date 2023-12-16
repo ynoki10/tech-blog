@@ -55,6 +55,16 @@ export const Article = defineDocumentType(() => ({
   },
 }));
 
+// 記事のタグがタグ一覧に存在するかチェックする
+function checkTagExistence(allArticles: ArticleType[]) {
+  const allTags = allArticles.flatMap((article) => article.tags);
+  const uniqueTags = [...new Set(allTags)];
+  const invalidTags = uniqueTags.filter((tag) => !TAGS.map((tag) => tag.label).includes(tag));
+  if (invalidTags.length > 0) {
+    throw new Error(`Invalid tags found: ${invalidTags.join(', ')}`);
+  }
+}
+
 function createTagCount(allArticles: ArticleType[]) {
   const tagsWithCount = TAGS.map((tag) => {
     const count = allArticles.filter((article) => article.tags.includes(tag.label)).length;
@@ -71,6 +81,7 @@ export default makeSource({
   },
   onSuccess: async (importData) => {
     const { allArticles } = await importData();
+    checkTagExistence(allArticles);
     createTagCount(allArticles);
   },
 });
