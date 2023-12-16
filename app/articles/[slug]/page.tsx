@@ -4,8 +4,10 @@ import { notFound } from 'next/navigation';
 import Link from '@/components/Link';
 import MDXRenderer from '@/components/MDXRenderer';
 import PageTitle from '@/components/PageTitle';
+import Tag from '@/components/Tag';
 
 import siteMetadata from '@/data/siteMetadata';
+import { tags } from '@/data/tags';
 import { Article, allArticles } from 'contentlayer/generated';
 
 export const generateMetadata = ({ params }: { params: { slug: string } }) => {
@@ -55,6 +57,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   );
   const postIndex = sortedArticles.findIndex((p) => p.slug === slug);
   const post = allArticles.find((p) => p.slug === slug) as Article;
+  const postTags = tags.filter((tag) => post.tags?.includes(tag.label));
 
   if (postIndex === -1) {
     return notFound();
@@ -88,6 +91,18 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
           <footer className="xl:pt-10">
             <div className="pt-4 xl:pt-8">
+              {postTags && (
+                <div className="py-4 xl:py-8">
+                  <h2 className="text-xl tracking-wide text-gray-900">Tags</h2>
+                  <ul className="mt-2 flex flex-wrap gap-3">
+                    {postTags.map((tag) => (
+                      <li key={tag.slug}>
+                        <Tag label={tag.label} slug={tag.slug} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <Link
                 href="/"
                 className="text-primary-500 hover:text-primary-600"
