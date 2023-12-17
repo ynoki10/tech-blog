@@ -12,7 +12,10 @@ export default function ArticleCard(post: Article) {
   return (
     <div className="mb-8">
       <h2 className="text-xl">
-        <Link href={post.path} className="text-blue-700 hover:text-blue-900 dark:text-blue-400">
+        <Link
+          href={`/articles/${post.slug}`}
+          className="text-blue-700 hover:text-blue-900 dark:text-blue-400"
+        >
           {post.title}
         </Link>
       </h2>
