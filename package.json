@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "markuplint": "markuplint \"./**/*.tsx\"",
+    "secretlint": "secretlint --maskSecrets --secretlintignore .gitignore '**/*'",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@markuplint/jsx-parser": "^3.12.0",
     "@markuplint/react-spec": "^3.13.0",
+    "@secretlint/secretlint-rule-preset-recommend": "^8.0.0",
     "@types/mdx": "^2.0.10",
     "@types/node": "^20.10.4",
     "@types/react": "^18.2.43",
@@ -39,6 +41,7 @@
     "markuplint": "^3.15.0",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",
+    "secretlint": "^8.0.0",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.3.3"
   },
