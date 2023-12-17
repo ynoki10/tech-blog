@@ -22,6 +22,9 @@
   "[typescriptreact]": {
     "editor.formatOnSave": true
   },
+  "[mdx]": {
+    "editor.formatOnSave": true
+  },
   "editor.lineNumbers": "on",
   "editor.tabSize": 2,
   "editor.wordWrap": "on",

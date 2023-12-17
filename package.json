@@ -9,6 +9,7 @@
     "lint": "next lint",
     "markuplint": "markuplint \"./**/*.tsx\"",
     "secretlint": "secretlint --maskSecrets --secretlintignore .gitignore '**/*'",
+    "prettier": "prettier --write .",
     "prepare": "husky install"
   },
   "dependencies": {
