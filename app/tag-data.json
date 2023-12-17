@@ -1,1 +1,10 @@
-[{"label":"JavaScript","slug":"javascript","count":3},{"label":"TypeScript","slug":"typescript","count":0},{"label":"React","slug":"react","count":1},{"label":"Next.js","slug":"nextjs","count":0},{"label":"HTML","slug":"html","count":2},{"label":"CSS","slug":"css","count":2},{"label":"セキュリティ","slug":"security","count":1},{"label":"デザイン","slug":"design","count":1}]
+[
+  { "label": "JavaScript", "slug": "javascript", "count": 3 },
+  { "label": "TypeScript", "slug": "typescript", "count": 0 },
+  { "label": "React", "slug": "react", "count": 1 },
+  { "label": "Next.js", "slug": "nextjs", "count": 0 },
+  { "label": "HTML", "slug": "html", "count": 2 },
+  { "label": "CSS", "slug": "css", "count": 2 },
+  { "label": "セキュリティ", "slug": "security", "count": 1 },
+  { "label": "デザイン", "slug": "design", "count": 1 }
+]
