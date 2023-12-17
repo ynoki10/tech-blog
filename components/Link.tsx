@@ -1,9 +1,9 @@
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { AnchorHTMLAttributes } from 'react';
 
 import type { LinkProps } from 'next/link';
 
-export default function CustomLink({
+export default function Link({
   href,
   ...rest
 }: LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>) {
@@ -11,7 +11,7 @@ export default function CustomLink({
   const isAnchorLink = href && href.startsWith('#');
 
   if (isInternalLink) {
-    return <Link href={href} {...rest} />;
+    return <NextLink href={href} {...rest} />;
   }
 
   if (isAnchorLink) {

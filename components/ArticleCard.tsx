@@ -1,6 +1,6 @@
 import { format, parseISO } from 'date-fns';
-import Link from 'next/link';
 
+import Link from '@/components/Link';
 import Tag from '@/components/Tag';
 
 import { TAGS } from '@/data/tags';
