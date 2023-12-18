@@ -74,7 +74,7 @@ function createTagCount(allArticles: ArticleType[]) {
     const count = allArticles.filter((article) => article.tags.includes(tag.label)).length;
     return { ...tag, count };
   });
-  writeFileSync('./app/tag-data.json', JSON.stringify(tagsWithCount, null, 2));
+  writeFileSync('./app/tag-data.json', `${JSON.stringify(tagsWithCount, null, 2)}\n`);
 }
 
 export default makeSource({
