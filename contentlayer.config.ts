@@ -1,6 +1,10 @@
 import { writeFileSync } from 'fs';
 
 import { ComputedFields, defineDocumentType, makeSource } from 'contentlayer/source-files';
+import rehypeCodeTitles from 'rehype-code-titles';
+import rehypePrismPlus from 'rehype-prism-plus';
+import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
 
 import siteMetadata from './data/siteMetadata';
 import { TAGS } from './data/tags';
@@ -78,6 +82,8 @@ export default makeSource({
   documentTypes: [Article],
   mdx: {
     cwd: process.cwd(),
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [rehypeSlug, rehypeCodeTitles, rehypePrismPlus],
   },
   onSuccess: async (importData) => {
     const { allArticles } = await importData();

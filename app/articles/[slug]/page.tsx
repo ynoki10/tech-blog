@@ -1,3 +1,5 @@
+import 'css/prism.css';
+
 import { compareDesc } from 'date-fns';
 import { notFound } from 'next/navigation';
 
