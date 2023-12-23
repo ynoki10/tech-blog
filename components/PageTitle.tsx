@@ -6,6 +6,8 @@ interface Props {
 
 export default function PageTitle({ children }: Props) {
   return (
-    <h1 className="text-3xl font-extrabold leading-9 text-gray-900 sm:leading-10">{children}</h1>
+    <h1 className="text-2xl font-extrabold leading-9 text-gray-900 sm:leading-10 md:text-3xl">
+      {children}
+    </h1>
   );
 }

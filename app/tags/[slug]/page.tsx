@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import ArticleCard from '@/components/ArticleCard';
+import PageTitle from '@/components/PageTitle';
 
 import { TAGS } from '@/data/tags';
 import { genPageMetadata } from 'app/seo';
@@ -28,11 +29,15 @@ export default function TagPage({ params }: { params: { slug: string } }) {
   const filteredPosts = allArticles.filter((post) => post.tags?.includes(tag.label));
 
   return (
-    <div className="mx-auto max-w-3xl py-8">
-      <h1 className="mb-8 text-center text-2xl font-black">{tag.label} に関する記事一覧</h1>
-      {filteredPosts.map((post, idx) => (
-        <ArticleCard key={idx} {...post} />
-      ))}
-    </div>
+    <>
+      <PageTitle>{tag.label} に関する記事一覧</PageTitle>
+      <ul className="space-y-8 pt-8 md:space-y-10">
+        {filteredPosts.map((post) => (
+          <li key={post._id}>
+            <ArticleCard {...post} />
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }

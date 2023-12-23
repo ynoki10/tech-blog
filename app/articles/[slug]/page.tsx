@@ -1,6 +1,6 @@
 import 'css/prism.css';
 
-import { compareDesc } from 'date-fns';
+import { compareDesc, format, parseISO } from 'date-fns';
 import { notFound } from 'next/navigation';
 
 import Link from '@/components/Link';
@@ -45,13 +45,6 @@ export const generateStaticParams = () => {
   return paths;
 };
 
-const postDateTemplate: Intl.DateTimeFormatOptions = {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-};
-
 export default function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
   const sortedArticles = allArticles.sort((a, b) =>
@@ -66,55 +59,41 @@ export default function Page({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <article className="mx-auto max-w-3xl px-4 sm:px-6">
-      <div className="xl:divide-y xl:divide-gray-200">
-        <header className="pt-6 xl:pb-6">
-          <div className="space-y-1 text-center">
-            <dl className="space-y-10">
-              <div>
-                <dt className="sr-only">公開日</dt>
-                <dd className="text-base font-medium leading-6 text-gray-500">
-                  <time dateTime={post.date}>
-                    {new Date(post.date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                  </time>
-                </dd>
-              </div>
-            </dl>
-            <div>
-              <PageTitle>{post.title}</PageTitle>
-            </div>
-          </div>
-        </header>
-        <div className="divide-y divide-gray-200 pb-8">
-          <div className="divide-y divide-gray-200 xl:col-span-3 xl:col-start-2 xl:pb-0">
-            <div className="prose max-w-none pb-8 pt-10">
-              <MDXRenderer code={post.body.code} />
-            </div>
-          </div>
-          <footer className="xl:pt-10">
-            <div className="pt-4 xl:pt-8">
-              {postTags && (
-                <div className="py-4 xl:py-8">
-                  <h2 className="text-xl tracking-wide text-gray-900">Tags</h2>
-                  <ul className="mt-2 flex flex-wrap gap-3">
-                    {postTags.map((tag) => (
-                      <li key={tag.slug}>
-                        <Tag label={tag.label} slug={tag.slug} />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              <Link
-                href="/"
-                className="text-primary-500 hover:text-primary-600"
-                aria-label="Back to the blog"
-              >
-                &larr; Back to the blog
-              </Link>
-            </div>
-          </footer>
+    <article className="divide-y divide-gray-400">
+      <header className="space-y-1 pb-2 md:space-y-2 md:pb-4">
+        <time
+          dateTime={post.date}
+          className="text-sm font-medium leading-6 text-gray-500 md:text-base"
+        >
+          {format(parseISO(post.date), 'LLLL d, yyyy')}
+        </time>
+        <PageTitle>{post.title}</PageTitle>
+      </header>
+      <div className="space-y-8 divide-y divide-gray-200 pt-8">
+        <div className="prose max-w-none">
+          <MDXRenderer code={post.body.code} />
         </div>
+        <footer className="space-y-8 pt-8">
+          <div>
+            {postTags && (
+              <div>
+                <h2 className="text-xl tracking-wide text-gray-900">Tags</h2>
+                <ul className="mt-2 flex flex-wrap gap-3">
+                  {postTags.map((tag) => (
+                    <li key={tag.slug}>
+                      <Tag label={tag.label} slug={tag.slug} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+          <div>
+            <Link href="/" className="text-primary-500 hover:text-primary-600">
+              <span aria-hidden="true">&larr;</span> 記事一覧へ戻る
+            </Link>
+          </div>
+        </footer>
       </div>
     </article>
   );

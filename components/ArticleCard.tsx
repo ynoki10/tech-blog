@@ -10,8 +10,8 @@ export default function ArticleCard(post: Article) {
   const postTags = TAGS.filter((tag) => post.tags?.includes(tag.label));
 
   return (
-    <div className="mb-8">
-      <h2 className="text-xl">
+    <article>
+      <h2 className="text-lg md:text-xl">
         <Link
           href={`/articles/${post.slug}`}
           className="text-blue-700 hover:text-blue-900 dark:text-blue-400"
@@ -28,9 +28,9 @@ export default function ArticleCard(post: Article) {
           ))}
         </ul>
       )}
-      <time dateTime={post.date} className="mb-2 mt-1 block text-xs text-gray-600">
+      <time dateTime={post.date} className="mt-1 block text-xs text-gray-600">
         {format(parseISO(post.date), 'LLLL d, yyyy')}
       </time>
-    </div>
+    </article>
   );
 }

@@ -1,4 +1,3 @@
-import Link from '@/components/Link';
 import SocialIcon from '@/components/social-icons';
 
 import siteMetadata from '@/data/siteMetadata';
@@ -15,11 +14,11 @@ export default function Footer() {
             <SocialIcon kind="twitter" href={siteMetadata.twitter} />
           </li>
         </ul>
-        <div className="mb-2 flex space-x-2 text-sm text-gray-500">
-          <div>{siteMetadata.author}</div>
-          <div>{`© ${new Date().getFullYear()}`}</div>
-          <Link href="/">{siteMetadata.title}</Link>
-        </div>
+        <p className="mb-2 flex space-x-2 text-sm text-gray-500">
+          <span>{siteMetadata.author}</span>
+          <span>{`© ${new Date().getFullYear()}`}</span>
+          <span>{siteMetadata.title}</span>
+        </p>
       </div>
     </footer>
   );

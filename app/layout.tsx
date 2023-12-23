@@ -44,12 +44,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja" className={`scroll-smooth`}>
       <body className="bg-white text-black antialiased">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
-          <div className="flex h-screen flex-col justify-between font-sans">
-            <Header />
-            <main className="mb-auto">{children}</main>
-            <Footer />
-          </div>
+        <div className="flex min-h-screen flex-col justify-between">
+          <Header />
+          <main className="mx-auto mb-auto w-full max-w-3xl px-4 pt-8 sm:px-6 sm:pt-12 md:pt-16">
+            {children}
+          </main>
+          <Footer />
         </div>
       </body>
     </html>

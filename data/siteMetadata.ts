@@ -1,11 +1,11 @@
 const siteMetadata = {
-  title: 'よしのきのブログ',
-  author: 'ynoki10',
-  headerTitle: 'よしのきのブログ',
+  title: "Yoshinoki's Blog",
+  author: 'よしのき',
+  headerTitle: "Yoshinoki's Blog",
   description:
-    'フロントエンドの周辺技術（主にJamstackやアクセシビリティ）について、調べたことや学んだことを雑多に書いています。',
+    'よしのきの技術ブログです。主にフロントエンドの技術やアクセシビリティについて、調べたことや学んだことを雑多にまとめています。',
   language: 'ja-jp',
-  theme: 'system', // system, dark or light
+  theme: 'system',
   siteUrl: 'https:example.com',
   siteRepo: 'https://github.com/ynoki10/tech-blog',
   siteLogo: '/static/images/logo.png',
