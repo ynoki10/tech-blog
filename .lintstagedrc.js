@@ -7,5 +7,5 @@ const buildEslintCommand = (filenames) =>
 
 module.exports = {
   '*.{ts,tsx}': [buildEslintCommand, 'markuplint'],
-  '!(*.png|*.jpg|*.jpeg|*.gif|*.webp)': ['secretlint', 'prettier --write'],
+  '!(*.png|*.jpg|*.jpeg|*.gif|*.webp|*.ico)': ['secretlint', 'prettier --write'],
 };
