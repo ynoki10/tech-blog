@@ -14,7 +14,13 @@ export default function HeaderTitle() {
 
   return (
     <Link href="/" className="flex items-center">
-      <Image src="/images/logo.webp" alt="" width={250} height={250} className="mr-2 h-8 w-8" />
+      <Image
+        src="/images/logo.webp"
+        alt=""
+        width={250}
+        height={250}
+        className="-mb-1 mr-2 h-8 w-8"
+      />
       {isHome ? (
         <h1 className={cssClasses}>{siteMetadata.headerTitle}</h1>
       ) : (
