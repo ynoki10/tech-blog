@@ -24,7 +24,7 @@ export default function Page() {
             <SocialIcon kind="github" href={siteMetadata.github} />
           </li>
           <li>
-            <SocialIcon kind="twitter" href={siteMetadata.twitter} />
+            <SocialIcon kind="x" href={siteMetadata.twitter} />
           </li>
         </ul>
       </div>

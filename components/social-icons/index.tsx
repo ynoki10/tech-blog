@@ -1,8 +1,8 @@
-import { Github, Twitter } from './icons';
+import { Github, X } from './icons';
 
 const components = {
   github: Github,
-  twitter: Twitter,
+  x: X,
 };
 
 type SocialIconProps = {

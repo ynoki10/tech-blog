@@ -10,7 +10,7 @@ export default function Footer() {
           <SocialIcon kind="github" href={siteMetadata.github} />
         </li>
         <li>
-          <SocialIcon kind="twitter" href={siteMetadata.twitter} />
+          <SocialIcon kind="x" href={siteMetadata.twitter} />
         </li>
       </ul>
       <p className="mt-3 flex space-x-2 text-sm text-gray-500">
