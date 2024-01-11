@@ -7,7 +7,11 @@ import type { MDXComponents } from 'mdx/types';
 
 const components: MDXComponents = {
   Image,
-  a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
+  a: ({ href, children, ...rest }) => (
+    <Link href={href as string} {...rest}>
+      {children}
+    </Link>
+  ),
 };
 
 export default function MDXRenderer({ code }: { code: string }) {
