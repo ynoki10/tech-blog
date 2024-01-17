@@ -1,9 +1,9 @@
 const siteMetadata = {
   title: "Yoshinoki's Blog",
-  author: 'よしのき',
+  author: 'Yoshinoki',
   headerTitle: "Yoshinoki's Blog",
   description:
-    'よしのきの技術ブログです。主にフロントエンドの技術やアクセシビリティについて、調べたことや学んだことを雑多にまとめています。',
+    'Yoshinokiの技術ブログです。主にフロントエンドの技術やアクセシビリティについて、調べたことや学んだことを雑多にまとめています。',
   profile:
     'マークアップ&フロントエンドエンジニア。Web制作会社でコーポレートサイトなど作っています。今はアクセシビリティとJamstackを勉強中。95年生まれ。京都に住んでいます🦆',
   language: 'ja-jp',
