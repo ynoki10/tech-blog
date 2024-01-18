@@ -2,8 +2,8 @@ import PageTitle from '@/components/PageTitle';
 import Tag from '@/components/Tag';
 
 import { genPageMetadata } from '@/app/seo';
+import tagData from '@/app/tag-data.json';
 import { TagsWithCount } from '@/data/tags';
-import tagData from 'app/tag-data.json';
 
 export const metadata = genPageMetadata({
   title: 'タグ一覧',

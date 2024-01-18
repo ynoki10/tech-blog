@@ -1,8 +1,8 @@
 import Image from '@/components/Image';
 import SocialIcon from '@/components/social-icons';
 
+import { genPageMetadata } from '@/app/seo';
 import siteMetadata from '@/data/siteMetadata';
-import { genPageMetadata } from 'app/seo';
 
 export const metadata = genPageMetadata({ title: 'About' });
 

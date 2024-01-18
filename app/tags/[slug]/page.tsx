@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import ArticleCard from '@/components/ArticleCard';
 import PageTitle from '@/components/PageTitle';
 
+import { genPageMetadata } from '@/app/seo';
 import { TAGS } from '@/data/tags';
-import { genPageMetadata } from 'app/seo';
 import { allArticles } from 'contentlayer/generated';
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
