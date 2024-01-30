@@ -1,0 +1,111 @@
+---
+title: 11ty(eleventy)でファイル名のままhtmlを出力する方法
+date: 2024-01-30
+summary: 11ty(eleventy)でxxx.htmlのような形式でhtmlを出力する方法を紹介しています。
+tags:
+  - 11ty
+---
+
+## はじめに
+
+eleventy はデフォルトの挙動として `/hoge/fuga.njk` のようなソースファイルを `/hoge/fuga/index.html` のように `[ファイル名]/index.html` の形で出力します。
+
+これを元ファイルと同じ構造の `/site/hoge/fuga.html` として出力するにはどうしたら良いかまとめておきます。
+
+## 結論
+
+先に結論を書いておきます。
+
+eleventy v2以降であれば `.eleventy.js` に次の設定を追加すればOK。
+
+```js:.eleventy.js
+module.exports = function (eleventyConfig) {
+  eleventyConfig.addGlobalData('permalink', () => {
+    return (data) => `${data.page.filePathStem}.${data.page.outputFileExtension}`;
+  });
+};
+```
+
+eleventy v1系を利用している場合は、各ファイルのFront Matter に次の記述を追加すればOKです。
+
+```yaml:/hoge/fuga.njk
+---
+permalink: '{{ page.filePathStem }}.html'
+---
+```
+
+## 調査
+
+まず11tyのドキュメントを読んでみます。
+
+https://www.11ty.dev/docs/permalinks/
+
+するとそもそもこの挙動はWebの生みの親ティム・バーナーズ・リー氏が書いた記事 **[Cool URIs don't change](https://www.w3.org/Provider/Style/URI)** に基づく仕様だと言うことが分かります。
+
+確かに今後ウェブの変化やサイトの改修にともなって、ページの拡張子が変わる（ `.html` でなくなる）ことはあり得るかもしれません。そういった際、パスまでのURLとしておけば拡張子が変わっても同じURLのまま利用できます。
+
+これは確かにその通りだなと思うのですが、色々な都合上どうしても `xxx.html` というファイル名を出力したい、という場面はかなりあると思います。（というか先日業務の中でそんな場面に出くわしたのがこの記事を書いたきっかけです）
+
+では、どのようにすれば `ファイル名.html` の形式で出力できるのでしょうか。
+
+## Permalink を個別に設定する
+
+まずは一番単純な方法です。
+
+11tyでは Front Matterのpermalinkで出力先の指定ができます。ここで個別に出力パスとファイル名を指定することで `index.html` 以外の形式でも自由なファイル名で出力が可能です。
+
+例えば `/hoge/fuga.njk` というファイルであれば、次のように指定すればOKです。
+
+```yaml:/hoge/fuga.njk
+---
+permalink: '/hoge/fuga.html'
+---
+```
+
+しかし、これだと任意の形式で出力したいファイルの数だけ手動で出力ファイル名を指定しなければいけません。
+
+対象ファイルが大量に存在する場合は相当な手間になってしまいます。
+
+## page.filePathStem を利用してファイル名を取得 → permalinkに指定
+
+ということで、ページのパスとファイル名をデータとして取得してpermalinkに指定できないか調べてみます。
+
+するとドキュメントの中にそれっぽい記述が見つかりました。
+
+https://www.11ty.dev/docs/permalinks/#put-quotes-around-template-syntax-in-yaml
+
+https://www.11ty.dev/docs/data-eleventy-supplied/#filepathstem
+
+`page.filePathStem` という変数でページのパスとファイル名の情報（拡張子は除く）を取得できるようです。これを permalink にテンプレート構文を使って埋め込みましょう。
+
+```yaml:/hoge/fuga.njk
+---
+permalink: '{{ page.filePathStem }}.html'
+---
+```
+
+こうすることで先程と同様、期待通りのパスとファイル名で出力できます。  
+全てのページに一律でこの記述を付与しておけば、サイト全体でファイル名をそのまま出力することが可能になりますね。
+
+ただし対象の全ファイルにpermalinkを追加する手間は発生するので、これも今ひとつスッキリしない解決策ではあります。  
+できれば 11ty 自体の設定で変更できないものでしょうか。
+
+## 11tyのデフォルトパーマリンクを変更する
+
+というわけで調べてみると、やはりありました。
+
+https://www.11ty.dev/docs/data-eleventy-supplied/#changing-your-project-default-permalinks
+
+11ty v2以降なら `.eleventy.js` に次の設定を追加するだけで `ファイル名.html` の形式で出力できるようになります。
+
+```js:.eleventy.js
+module.exports = function(eleventyConfig) {
+  eleventyConfig.addGlobalData("permalink", () => {
+    return (data) => `${data.page.filePathStem}.${data.page.outputFileExtension}`;
+  });
+};
+```
+
+v2 以降を使っているならこの方法が一番シンプルですね。
+
+（業務ではv1系を使っていたためこの方法は採用できませんでした… 🙃）

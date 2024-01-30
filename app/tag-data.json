@@ -3,5 +3,10 @@
     "label": "雑記",
     "slug": "random-note",
     "count": 2
+  },
+  {
+    "label": "11ty",
+    "slug": "11ty",
+    "count": 1
   }
 ]
