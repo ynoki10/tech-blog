@@ -21,7 +21,7 @@ export default function Page() {
           height={192}
           className="h-48 w-48 rounded-full"
         />
-        <p className="mt-4 text-2xl font-bold leading-8 tracking-tight">{siteMetadata.author}</p>
+        <p className="mt-4 text-2xl font-bold leading-8 tracking-wide">{siteMetadata.author}</p>
         <ul className="flex space-x-3 pt-4">
           <li>
             <SocialIcon kind="github" href={siteMetadata.github} />
