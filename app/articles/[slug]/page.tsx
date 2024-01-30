@@ -21,21 +21,23 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
 
   return {
     title: post.title,
-    description: post.summary,
+    description: `${post.summary} | ${siteMetadata.title}`,
     openGraph: {
       title: post.title,
-      description: post.summary,
+      description: `${post.summary} | ${siteMetadata.title}`,
       siteName: siteMetadata.title,
       locale: 'ja_JP',
       type: 'article',
       publishedTime: publishedAt,
       modifiedTime: modifiedAt,
       url: './',
+      images: [siteMetadata.socialBanner],
     },
     twitter: {
       card: 'summary',
       title: post.title,
-      description: post.summary,
+      description: `${post.summary} | ${siteMetadata.title}`,
+      images: [siteMetadata.socialBanner],
     },
   };
 };

@@ -12,7 +12,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const label = TAGS.find((tag) => tag.slug === slug)?.label;
   return genPageMetadata({
     title: label ? `${label}に関する記事` : 'タグが見つかりません',
-    description: label ? `${label}に関する記事一覧です。` : `タグが見つかりません。`,
+    description: label ? `${label}に関する記事の一覧ページです。` : `タグが見つかりません。`,
   });
 }
 

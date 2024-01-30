@@ -7,7 +7,7 @@ import { TagsWithCount } from '@/data/tags';
 
 export const metadata = genPageMetadata({
   title: 'タグ一覧',
-  description: 'ブログ内のタグ一覧を表示します。',
+  description: 'ブログ内のタグの一覧ページです。',
 });
 
 export default function Page() {

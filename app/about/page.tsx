@@ -4,7 +4,10 @@ import SocialIcon from '@/components/social-icons';
 import { genPageMetadata } from '@/app/seo';
 import siteMetadata from '@/data/siteMetadata';
 
-export const metadata = genPageMetadata({ title: 'About' });
+export const metadata = genPageMetadata({
+  title: 'About',
+  description: '筆者の自己紹介ページです。',
+});
 
 export default function Page() {
   return (
