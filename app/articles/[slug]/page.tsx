@@ -1,4 +1,4 @@
-import 'css/prism.css';
+import '@/css/prism.css';
 
 import { compareDesc, format, parseISO } from 'date-fns';
 import { notFound } from 'next/navigation';
