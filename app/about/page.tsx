@@ -29,6 +29,9 @@ export default function Page() {
           <li>
             <SocialIcon kind="x" href={siteMetadata.twitter} />
           </li>
+          <li>
+            <SocialIcon kind="zenn" href={siteMetadata.zenn} />
+          </li>
         </ul>
       </div>
       <p className="pt-10">{siteMetadata.profile}</p>

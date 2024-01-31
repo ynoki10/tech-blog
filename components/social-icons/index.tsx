@@ -1,8 +1,9 @@
-import { Github, X } from './icons';
+import { Github, X, Zenn } from '@/components/social-icons/icons';
 
 const components = {
   github: Github,
   x: X,
+  zenn: Zenn,
 };
 
 type SocialIconProps = {

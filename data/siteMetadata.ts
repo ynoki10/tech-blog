@@ -14,6 +14,7 @@ const siteMetadata = {
   socialBanner: '/ogp.png',
   github: 'https://github.com/ynoki10',
   twitter: 'https://twitter.com/4noki10',
+  zenn: 'https://zenn.dev/yoshinoki',
   locale: 'ja-JP',
 } as const;
 
