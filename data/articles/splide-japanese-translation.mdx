@@ -1,7 +1,7 @@
 ---
 title: Splideの読み上げラベルを日本語化する
 date: 2024-02-01
-summary: 1Splideの読み上げラベルを日本語化する方法を紹介しています。
+summary: Splideの読み上げラベルを日本語化する方法を紹介しています。
 tags:
   - A11y
   - Splide
@@ -12,7 +12,7 @@ tags:
 
 Splide はアクセシビリティへの配慮が非常に行き届いていて、特に何をせずともスライダー内の要素に適切なラベルを付与してくれます。
 
-しかしこの読み上げラベル、デフォルトでは英語で付与されます。（まあそりゃそうだよね、という感じですが）
+しかしこの読み上げラベル、デフォルトでは英語で付与されます。（まあそうですよね）
 
 例えば、次のスライドへ進む矢印ボタンには「Next slide」という aria-label が付与されます。
 
@@ -20,7 +20,9 @@ Splide はアクセシビリティへの配慮が非常に行き届いていて�
 <button aria-label="Next slide" ...>...</button>
 ```
 
-ですので、Splideを日本語のサイトに導入する際は必ず日本語のテキストに変更しておきましょう。  
+これをこのまま日本語サイトに導入すると「スライダーの要素だけ突然英語で読み上げられる...」という困った状態になってしまいます。
+
+ということで、Splideを日本語のサイトに導入する際は必ずテキストを日本語に変更しておきましょう。  
 これはSplideのオプション [i18n](https://ja.splidejs.com/guides/i18n/) で簡単に対応ができます。
 
 私は多くの場合次のように設定しています。[^1]
@@ -53,13 +55,16 @@ new Splide('.splide', {
 
 ## まとめ
 
-Splide はアクセシビリティへの配慮が行き届いている素晴らしいライブラリですが、使い方をきちんと理解していないとアクセシビリティを損なう結果になりかねません。  
-これからもラベルはきちんと設定するようにしたいです。
+Splideはアクセシビリティへの配慮が行き届いている素晴らしいライブラリです。
 
-また「そもそもカルーセルスライダーを気軽に採用しない」というのも大事な考え方ですね。。😶
+ただし使い手がきちんと使い方を理解していないと逆にアクセシビリティを損なう結果にもなりかねません。私もこれからもラベルは忘れずにきちんと設定するようにしたいです。
+
+また「そもそもカルーセルスライダーを気軽に採用しない」というのも大事な考えですね。。😶
 
 ## 参考
 
 [ローカライズ - Splide](https://ja.splidejs.com/guides/i18n/)  
 [HTML構造 - Splide](https://ja.splidejs.com/guides/structure/)  
-[アクセシビリティ - Splide](https://ja.splidejs.com/guides/accessibility/#aria%E5%B1%9E%E6%80%A7wcag-412)
+[アクセシビリティ - Splide](https://ja.splidejs.com/guides/accessibility/#aria%E5%B1%9E%E6%80%A7wcag-412)  
+[カルーセル | Accessible & Usable](https://accessible-usable.net/2014/03/entry_140316.html)  
+[みんなが使えるカルーセルUIを考える | CyberAgent Developers Blog](https://developers.cyberagent.co.jp/blog/archives/32842/)
