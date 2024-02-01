@@ -8,5 +8,20 @@
     "label": "11ty",
     "slug": "11ty",
     "count": 1
+  },
+  {
+    "label": "Tips",
+    "slug": "tips",
+    "count": 1
+  },
+  {
+    "label": "A11y",
+    "slug": "a11y",
+    "count": 1
+  },
+  {
+    "label": "Splide",
+    "slug": "splide",
+    "count": 1
   }
 ]
