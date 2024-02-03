@@ -21,7 +21,10 @@ export default function Page() {
           return (
             <li key={tag.slug}>
               <Tag slug={tag.slug} label={tag.label} />
-              <span className="ml-2 inline-block">{`(${tag.count})`}</span>
+              <span className="ml-2 inline-block">
+                ({tag.count}
+                <span className="sr-only">件の記事</span>)
+              </span>
             </li>
           );
         })}
