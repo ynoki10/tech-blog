@@ -1,6 +1,6 @@
 {
   "root": true,
-  "plugins": ["@typescript-eslint", "unused-imports", "strict-dependencies"],
+  "plugins": ["unused-imports", "strict-dependencies"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended-type-checked",
