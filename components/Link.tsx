@@ -18,5 +18,5 @@ export default function Link({
     return <a href={href} {...rest} />;
   }
 
-  return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} />;
+  return <a href={href} rel="noopener noreferrer" target="_blank" {...rest} />;
 }

@@ -64,8 +64,8 @@ export default function Page({ params }: { params: { slug: string } }) {
     <article className="divide-y divide-gray-400">
       <header className="space-y-1 pb-2 md:space-y-2 md:pb-4">
         <time
-          dateTime={post.date}
           className="text-sm font-medium leading-6 text-gray-500 md:text-base"
+          dateTime={post.date}
         >
           {format(parseISO(post.date), 'LLLL d, yyyy')}
         </time>
@@ -91,7 +91,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             )}
           </div>
           <div>
-            <Link href="/" className="text-primary-500 hover:text-primary-600">
+            <Link className="text-primary-500 hover:text-primary-600" href="/">
               <span aria-hidden="true">&larr;</span> 記事一覧へ戻る
             </Link>
           </div>

@@ -20,7 +20,7 @@ export default function Page() {
         {sortedTags.map((tag) => {
           return (
             <li key={tag.slug}>
-              <Tag slug={tag.slug} label={tag.label} />
+              <Tag label={tag.label} slug={tag.slug} />
               <span className="ml-2 inline-block">
                 ({tag.count}
                 <span className="sr-only">件の記事</span>)

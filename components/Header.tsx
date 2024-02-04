@@ -15,7 +15,7 @@ export default function Header() {
           {headerNavLinks
             .filter((link) => link.href !== '/')
             .map((link) => (
-              <Link key={link.title} href={link.href} className="font-medium text-gray-900">
+              <Link className="font-medium text-gray-900" href={link.href} key={link.title}>
                 {link.title}
               </Link>
             ))}

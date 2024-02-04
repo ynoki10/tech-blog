@@ -20,12 +20,12 @@ export default function SocialIcon({ kind, href }: SocialIconProps) {
   return (
     <a
       className="text-sm text-gray-500 transition hover:text-gray-600"
-      target="_blank"
-      rel="noopener noreferrer"
       href={href}
+      rel="noopener noreferrer"
+      target="_blank"
     >
       <span className="sr-only">{kind}</span>
-      <SocialSvg className={`h-6 w-6 fill-current text-gray-700 hover:text-gray-600`} />
+      <SocialSvg className={`size-6 fill-current text-gray-700 hover:text-gray-600`} />
     </a>
   );
 }

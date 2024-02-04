@@ -15,22 +15,22 @@ export default function Page() {
       <h1 className="sr-only">About</h1>
       <div className="flex flex-col items-center">
         <Image
-          src="/images/icon.webp"
           alt="プロフィール画像：はっきりとした線で描かれたポップなイラスト。男性が前方を見上げて口角を上げている。空をイメージした青い背景。"
-          width={192}
+          className="size-48 rounded-full"
           height={192}
-          className="h-48 w-48 rounded-full"
+          src="/images/icon.webp"
+          width={192}
         />
         <p className="mt-4 text-2xl font-bold leading-8 tracking-wide">{siteMetadata.author}</p>
         <ul className="flex space-x-3 pt-4">
           <li>
-            <SocialIcon kind="github" href={siteMetadata.github} />
+            <SocialIcon href={siteMetadata.github} kind="github" />
           </li>
           <li>
-            <SocialIcon kind="x" href={siteMetadata.twitter} />
+            <SocialIcon href={siteMetadata.twitter} kind="x" />
           </li>
           <li>
-            <SocialIcon kind="zenn" href={siteMetadata.zenn} />
+            <SocialIcon href={siteMetadata.zenn} kind="zenn" />
           </li>
         </ul>
       </div>

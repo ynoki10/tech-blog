@@ -13,13 +13,13 @@ export default function HeaderTitle() {
   const cssClasses = 'text-xl font-semibold md:text-2xl';
 
   return (
-    <Link href="/" className="flex items-center">
+    <Link className="flex items-center" href="/">
       <Image
-        src="/images/logo.webp"
         alt=""
-        width={250}
+        className="-mb-1 mr-2 size-8"
         height={250}
-        className="-mb-1 mr-2 h-8 w-8"
+        src="/images/logo.webp"
+        width={250}
       />
       {isHome ? (
         <h1 className={cssClasses}>{siteMetadata.headerTitle}</h1>
