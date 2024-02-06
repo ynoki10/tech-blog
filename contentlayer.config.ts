@@ -41,6 +41,7 @@ export const Article = defineDocumentType(() => ({
     },
     lastmod: { type: 'date' },
     summary: { type: 'string' },
+    draft: { type: 'boolean', default: false },
   },
   computedFields: {
     ...computedFields,
@@ -60,8 +61,8 @@ export const Article = defineDocumentType(() => ({
 }));
 
 // 記事のタグがタグ一覧に存在するかチェックする
-function checkTagExistence(allArticles: ArticleType[]) {
-  const allTags = allArticles.flatMap((article) => article.tags);
+function checkTagExistence(articles: ArticleType[]) {
+  const allTags = articles.flatMap((article) => article.tags);
   const uniqueTags = Array.from(new Set(allTags));
   const invalidTags = uniqueTags.filter((tag) => !TAGS.map((tag) => tag.label).includes(tag));
   if (invalidTags.length > 0) {
@@ -69,9 +70,9 @@ function checkTagExistence(allArticles: ArticleType[]) {
   }
 }
 
-function createTagCount(allArticles: ArticleType[]) {
+function createTagCount(articles: ArticleType[]) {
   const tagsWithCount = TAGS.map((tag) => {
-    const count = allArticles.filter((article) => article.tags.includes(tag.label)).length;
+    const count = articles.filter((article) => article.tags.includes(tag.label)).length;
     return { ...tag, count };
   });
   writeFileSync('./app/tag-data.json', `${JSON.stringify(tagsWithCount, null, 2)}\n`);
@@ -87,7 +88,8 @@ export default makeSource({
   },
   onSuccess: async (importData) => {
     const { allArticles } = await importData();
-    checkTagExistence(allArticles);
-    createTagCount(allArticles);
+    const publishedArticles = allArticles.filter((article) => !article.draft);
+    checkTagExistence(publishedArticles);
+    createTagCount(publishedArticles);
   },
 });

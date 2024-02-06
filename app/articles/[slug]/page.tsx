@@ -43,7 +43,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
 };
 
 export const generateStaticParams = () => {
-  const paths = allArticles.map((p) => ({ slug: p.slug }));
+  const paths = allArticles.filter((p) => !p.draft).map((p) => ({ slug: p.slug }));
   return paths;
 };
 
