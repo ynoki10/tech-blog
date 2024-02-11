@@ -1,20 +1,26 @@
+import { ResolvedMetadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import ArticleCard from '@/components/ArticleCard';
 import PageTitle from '@/components/PageTitle';
 
-import { genPageMetadata } from '@/app/seo';
+import { genMetadata } from '@/app/seo';
 import { TAGS } from '@/data/tags';
 import { allArticles } from 'contentlayer/generated';
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
+export const generateMetadata = async (
+  { params }: { params: { slug: string } },
+  parent: Promise<ResolvedMetadata>,
+) => {
   const slug = params.slug;
   const label = TAGS.find((tag) => tag.slug === slug)?.label;
-  return genPageMetadata({
+
+  return genMetadata({
     title: label ? `${label}に関する記事` : 'タグが見つかりません',
     description: label ? `${label}に関する記事の一覧ページです。` : `タグが見つかりません。`,
+    parent,
   });
-}
+};
 
 export const generateStaticParams = () => {
   const paths = TAGS.map((t) => ({ slug: t.slug }));

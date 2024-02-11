@@ -13,14 +13,23 @@ export const metadata: Metadata = {
     template: `%s | ${siteMetadata.title}`,
   },
   description: siteMetadata.description,
+  alternates: {
+    canonical: './',
+  },
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
     url: './',
     siteName: siteMetadata.title,
-    images: [siteMetadata.socialBanner],
-    locale: 'ja_JP',
+    locale: siteMetadata.locale,
     type: 'website',
+  },
+  twitter: {
+    title: siteMetadata.title,
+    card: 'summary_large_image',
+    description: siteMetadata.description,
+    site: siteMetadata.twitterId,
+    creator: siteMetadata.twitterId,
   },
   robots: {
     index: true,
@@ -32,11 +41,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  twitter: {
-    title: siteMetadata.title,
-    card: 'summary_large_image',
-    images: [siteMetadata.socialBanner],
   },
 };
 

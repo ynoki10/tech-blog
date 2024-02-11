@@ -1,6 +1,7 @@
 import '@/css/prism.css';
 
 import { compareDesc, format, parseISO } from 'date-fns';
+import { ResolvedMetadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import Link from '@/components/Link';
@@ -8,38 +9,33 @@ import MDXRenderer from '@/components/MDXRenderer';
 import PageTitle from '@/components/PageTitle';
 import Tag from '@/components/Tag';
 
-import siteMetadata from '@/data/siteMetadata';
+import { genMetadata } from '@/app/seo';
 import { TAGS } from '@/data/tags';
 import { Article, allArticles } from 'contentlayer/generated';
 
-export const generateMetadata = ({ params }: { params: { slug: string } }) => {
+export const generateMetadata = async (
+  {
+    params,
+  }: {
+    params: { slug: string };
+  },
+  parent: Promise<ResolvedMetadata>,
+) => {
   const slug = params.slug;
   const post = allArticles.find((post) => post.slug === slug);
   if (!post) throw new Error(`Post not found for slug: ${slug}`);
-  const publishedAt = new Date(post.date).toISOString();
-  const modifiedAt = new Date(post.lastmod || post.date).toISOString();
 
-  return {
+  const publishedTime = new Date(post.date).toISOString();
+  const modifiedTime = new Date(post.lastmod || post.date).toISOString();
+
+  return genMetadata({
     title: post.title,
-    description: `${post.summary} | ${siteMetadata.title}`,
-    openGraph: {
-      title: post.title,
-      description: `${post.summary} | ${siteMetadata.title}`,
-      siteName: siteMetadata.title,
-      locale: 'ja_JP',
-      type: 'article',
-      publishedTime: publishedAt,
-      modifiedTime: modifiedAt,
-      url: './',
-      images: [siteMetadata.socialBanner],
-    },
-    twitter: {
-      card: 'summary',
-      title: post.title,
-      description: `${post.summary} | ${siteMetadata.title}`,
-      images: [siteMetadata.socialBanner],
-    },
-  };
+    description: post.summary,
+    twitterCard: 'summary',
+    ogPublishedTime: publishedTime,
+    ogModifiedTime: modifiedTime,
+    parent,
+  });
 };
 
 export const generateStaticParams = () => {

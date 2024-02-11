@@ -1,13 +1,18 @@
+import { ResolvedMetadata } from 'next';
+
 import Image from '@/components/Image';
 import SocialIcon from '@/components/social-icons';
 
-import { genPageMetadata } from '@/app/seo';
+import { genMetadata } from '@/app/seo';
 import siteMetadata from '@/data/siteMetadata';
 
-export const metadata = genPageMetadata({
-  title: 'About',
-  description: '筆者の自己紹介ページです。',
-});
+export const generateMetadata = async (_: never, parent: Promise<ResolvedMetadata>) => {
+  return genMetadata({
+    title: 'About',
+    description: '筆者の自己紹介ページです。',
+    parent,
+  });
+};
 
 export default function Page() {
   return (
