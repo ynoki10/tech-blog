@@ -1,4 +1,4 @@
-import { ResolvedMetadata } from 'next';
+import { ResolvingMetadata } from 'next';
 
 import PageTitle from '@/components/PageTitle';
 import Tag from '@/components/Tag';
@@ -7,7 +7,7 @@ import { genMetadata } from '@/app/seo';
 import tagData from '@/app/tag-data.json';
 import { TagsWithCount } from '@/data/tags';
 
-export const generateMetadata = async (_: never, parent: Promise<ResolvedMetadata>) => {
+export const generateMetadata = async (_: never, parent: ResolvingMetadata) => {
   return genMetadata({
     title: 'タグ一覧',
     description: 'ブログ内のタグの一覧ページです。',

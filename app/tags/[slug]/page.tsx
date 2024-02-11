@@ -1,4 +1,4 @@
-import { ResolvedMetadata } from 'next';
+import { ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import ArticleCard from '@/components/ArticleCard';
@@ -10,7 +10,7 @@ import { allArticles } from 'contentlayer/generated';
 
 export const generateMetadata = async (
   { params }: { params: { slug: string } },
-  parent: Promise<ResolvedMetadata>,
+  parent: ResolvingMetadata,
 ) => {
   const slug = params.slug;
   const label = TAGS.find((tag) => tag.slug === slug)?.label;

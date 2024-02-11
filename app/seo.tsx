@@ -1,4 +1,4 @@
-import { Metadata, ResolvedMetadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
 
 import siteMetadata from '@/data/siteMetadata';
 
@@ -7,7 +7,7 @@ type SEOProps = {
   description?: string;
   ogType?: 'article' | 'website';
   twitterCard?: 'summary' | 'summary_large_image';
-  parent: Promise<ResolvedMetadata>;
+  parent: ResolvingMetadata;
   ogPublishedTime?: string;
   ogModifiedTime?: string;
 };
@@ -22,6 +22,8 @@ export async function genMetadata({
   ogModifiedTime,
 }: SEOProps): Promise<Metadata> {
   const parentMetadata = await parent;
+  const parentOgImages = parentMetadata.openGraph?.images;
+  const parentTwitterImages = parentMetadata.twitter?.images;
 
   const ogDescription = description
     ? `${description} | ${siteMetadata.title}`
@@ -37,7 +39,7 @@ export async function genMetadata({
       siteName: siteMetadata.title,
       locale: siteMetadata.locale,
       type: ogType,
-      ...(parentMetadata.openGraph && { images: parentMetadata.openGraph?.images }),
+      ...(parentOgImages && { images: parentOgImages }),
       ...(ogPublishedTime && { publishedTime: ogPublishedTime }),
       ...(ogModifiedTime && { modifiedTime: ogModifiedTime }),
     },
@@ -47,7 +49,7 @@ export async function genMetadata({
       description: ogDescription,
       site: siteMetadata.twitterId,
       creator: siteMetadata.twitterId,
-      ...(parentMetadata.twitter && { images: parentMetadata.twitter?.images }),
+      ...(parentTwitterImages && { images: parentTwitterImages }),
     },
   };
 }

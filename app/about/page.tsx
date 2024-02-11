@@ -1,4 +1,4 @@
-import { ResolvedMetadata } from 'next';
+import { ResolvingMetadata } from 'next';
 
 import Image from '@/components/Image';
 import SocialIcon from '@/components/social-icons';
@@ -6,7 +6,7 @@ import SocialIcon from '@/components/social-icons';
 import { genMetadata } from '@/app/seo';
 import siteMetadata from '@/data/siteMetadata';
 
-export const generateMetadata = async (_: never, parent: Promise<ResolvedMetadata>) => {
+export const generateMetadata = async (_: never, parent: ResolvingMetadata) => {
   return genMetadata({
     title: 'About',
     description: '筆者の自己紹介ページです。',

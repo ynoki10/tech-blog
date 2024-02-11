@@ -1,7 +1,7 @@
 import '@/css/prism.css';
 
 import { compareDesc, format, parseISO } from 'date-fns';
-import { ResolvedMetadata } from 'next';
+import { ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import Link from '@/components/Link';
@@ -19,7 +19,7 @@ export const generateMetadata = async (
   }: {
     params: { slug: string };
   },
-  parent: Promise<ResolvedMetadata>,
+  parent: ResolvingMetadata,
 ) => {
   const slug = params.slug;
   const post = allArticles.find((post) => post.slug === slug);
