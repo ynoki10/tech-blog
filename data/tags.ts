@@ -4,6 +4,7 @@ export const TAGS = [
   { label: 'Tips', slug: 'tips' },
   { label: 'A11y', slug: 'a11y' },
   { label: 'Splide', slug: 'splide' },
+  { label: 'WordPress', slug: 'wordpress' },
 ] as const;
 
 export type Tag = (typeof TAGS)[number];

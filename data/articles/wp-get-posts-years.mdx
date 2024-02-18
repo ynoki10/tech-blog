@@ -1,0 +1,70 @@
+---
+title: WordPressで投稿が存在する年の一覧を取得する
+date: 2024-02-18
+summary: WordPressで投稿が存在する年の一覧を取得する方法を紹介しています。
+tags:
+  - WordPress
+---
+
+## はじめに
+
+WordPressを使っていて、「投稿が存在する年のデータのみを一覧で取得したい」という場面は意外と多いと思います。
+（アーカイブページで年ごとに投稿を表示したい、年のデータを使った絞り込みUIを作成したい、など）
+
+しかし、WordPressには投稿年の一覧データのみ取得するための関数が用意されていません。  
+`wp_get_archives()`を使えばアーカイブリンクを取得できますが、この関数はHTMLしか返さないため、年の一覧を取得して何かしらの処理を行う場合は適していません。
+
+ここでは、投稿が存在する年の一覧を取得する方法を2つ紹介します。
+
+## 方法1：WP_Queryを使う
+
+WP_Queryを使って投稿を取得。愚直にループで年の一覧を取得します。
+
+```php
+$args = [
+  'post_type' => 'post',
+  'orderby' => 'date',
+  'posts_per_page' => -1
+];
+$query = new WP_Query($args);
+$years = [];
+if ($query->have_posts()) {
+  while ($query->have_posts()) {
+    $query->the_post();
+    if (get_the_date('Y')) {
+      array_push($years, get_the_date('Y'));
+    }
+  }
+  wp_reset_postdata();
+}
+$years = array_unique($years);
+$years = array_values($years);
+```
+
+都度`WP_Query`で投稿を全件取得するため、処理が重くなる可能性があります。
+
+年の一覧を取得するためだけにこのようなコードを書くのもなんだかなぁ、という感じがします。
+
+## 方法2：SQLを使う
+
+`$wpdb`を使ってSQLを実行し、投稿が存在する年の一覧を取得します。
+
+```php
+$years = $wpdb->get_col("SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts WHERE post_status = 'publish' AND post_type = 'post' ORDER BY post_date DESC");
+```
+
+SQLに慣れていない人にとっては、理解しにくいコードになりますが、こちらの方が処理が軽く、コードも短くなります。
+
+### 解説
+
+- `$wpdb->get_col()`： SQLを実行して結果を配列で取得する
+- `DISTINCT`： 重複する値を取得しないようにする
+- `YEAR(post_date)`： post_dateカラムの年のみを取得
+- `$wpdb->posts`： WordPressの投稿データが保存されているテーブルを指定
+- `WHERE post_status = 'publish' AND post_type = 'post'`： 公開されている投稿のみを取得
+- `ORDER BY post_date DESC`： 年の降順で取得
+
+## 参考リンク
+
+- https://elearn.jp/wpman/function/wp_get_archives.html
+- https://into-the-program.com/post-exist-year/
