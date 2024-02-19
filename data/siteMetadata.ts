@@ -5,7 +5,7 @@ const siteMetadata = {
   description:
     'Yoshinokiの技術ブログです。主にフロントエンドの技術やアクセシビリティについて、調べたことや学んだことを雑多にまとめています。',
   profile:
-    'マークアップ&フロントエンドエンジニア。Web制作会社でコーポレートサイトなど作っています。今はアクセシビリティとJamstackを勉強中。京都に住んでいます🦆',
+    'マークアップ&フロントエンドエンジニア。Web制作会社で主にコーポレートサイトを作っています。最近はアクセシビリティとモダンフロントエンド、Jamstackなどを勉強中。京都に住んでいます🦆',
   language: 'ja-jp',
   theme: 'system',
   siteUrl: 'https://www.yoshinoki.dev',
