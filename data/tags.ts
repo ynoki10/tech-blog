@@ -5,6 +5,8 @@ export const TAGS = [
   { label: 'A11y', slug: 'a11y' },
   { label: 'Splide', slug: 'splide' },
   { label: 'WordPress', slug: 'wordpress' },
+  { label: 'Tailwind CSS', slug: 'tailwind' },
+  { label: 'TypeScript', slug: 'typescript' },
 ] as const;
 
 export type Tag = (typeof TAGS)[number];

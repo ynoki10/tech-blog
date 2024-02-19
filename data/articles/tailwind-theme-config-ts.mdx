@@ -1,0 +1,49 @@
+---
+title: tailwind.config.tsでtypographyにtheme関数を使う場合の型定義
+date: 2024-02-20
+summary: tailwind.config.tsでtypographyにtheme関数を使う場合の型定義について解説しています。
+tags:
+  - Tailwind CSS
+  - TypeScript
+draft: true
+---
+
+## はじめに
+
+Tailwind CSSの Typography めちゃくちゃ便利ですよね。
+
+`tailwind.config.js`で設定する場合、`theme`関数を使うことができますが、TypeScriptを使っている場合、型定義がうまくいかないことがあります。
+
+```javascript
+module.exports = {
+  theme: {
+    typography: (theme) => ({
+      DEFAULT: {
+        css: {
+          color: theme('colors.gray.800'),
+        },
+      },
+    }),
+  },
+};
+```
+
+## 解決方法
+
+`PluginAPI['theme']`を使うことで型定義を行うことができます。
+
+```typescript:tailwind.config.ts
+import { PluginAPI } from 'tailwindcss/types/config';
+
+module.exports = {
+  theme: {
+    typography: (theme: PluginAPI["theme"]) => ({
+      DEFAULT: {
+        css: {
+          color: theme('colors.gray.800'),
+        },
+      },
+    }),
+  },
+};
+```
