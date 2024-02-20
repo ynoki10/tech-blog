@@ -5,45 +5,72 @@ summary: tailwind.config.tsでtypographyにtheme関数を使う場合の型定�
 tags:
   - Tailwind CSS
   - TypeScript
-draft: true
 ---
 
-## はじめに
+Markdownの記事や外部APIから取得したHTMLをTailwind CSSでスタイリングする際には [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) がとても便利です。
 
-Tailwind CSSの Typography めちゃくちゃ便利ですよね。
+デフォルトのTypograhyをカスタマイズするとき、Tailwindの設定ファイルの中で `theme()` 関数を使いたい場面があると思います。
 
-`tailwind.config.js`で設定する場合、`theme`関数を使うことができますが、TypeScriptを使っている場合、型定義がうまくいかないことがあります。
+しかし設定ファイルをTypeScriptで書いていると、この`theme()`の型定義でエラーになってしまいました。以前少しハマったので解決策を備忘録として残しておきます。
 
-```javascript
-module.exports = {
-  theme: {
-    typography: (theme) => ({
-      DEFAULT: {
-        css: {
-          color: theme('colors.gray.800'),
-        },
-      },
-    }),
-  },
-};
-```
-
-## 解決方法
-
-`PluginAPI['theme']`を使うことで型定義を行うことができます。
+まずはエラーになる例です。  
+theme関数の型定義がないため、`theme`の型が`any`になってしまっています。
 
 ```typescript:tailwind.config.ts
+import type { Config } from 'tailwindcss';
+
+const config = {
+  theme: {
+    extend: {
+      // Parameter 'theme' implicitly has an 'any' type. のエラーが出る
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            a: {
+              color: theme('colors.indigo.800'),
+            },
+          },
+        },
+      }),
+    },
+  },
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+} satisfies Config;
+
+export default config;
+```
+
+これを回避するために、`theme`の型を指定する必要があります。
+`tailwindcss/types/config` に `PluginAPI` という型が定義されているので、これを使って型を指定しましょう。
+
+```typescript:tailwind.config.ts
+import type { Config } from 'tailwindcss';
 import { PluginAPI } from 'tailwindcss/types/config';
 
-module.exports = {
+const config = {
   theme: {
-    typography: (theme: PluginAPI["theme"]) => ({
-      DEFAULT: {
-        css: {
-          color: theme('colors.gray.800'),
+    extend: {
+      typography: (theme: PluginAPI['theme']) => ({
+        DEFAULT: {
+          css: {
+            a: {
+              color: theme('colors.indigo.800'),
+            },
+          },
         },
-      },
-    }),
+      }),
+    },
   },
-};
+  plugins: [require('@tailwindcss/typography')],
+} satisfies Config;
+
+export default config;
 ```
+
+これで無事エラーが解消されました。
+
+この内容は以下のIssueで解説されていたものです。
+
+https://github.com/tailwindlabs/tailwindcss/discussions/11238#discussioncomment-6120287
+
+困ったときはちゃんとGitHubのIssueを読みましょう。（自戒）
