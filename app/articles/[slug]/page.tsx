@@ -23,10 +23,10 @@ export const generateMetadata = async (
 ) => {
   const slug = params.slug;
   const post = allArticles.find((post) => post.slug === slug);
-  if (!post) throw new Error(`Post not found for slug: ${slug}`);
+  if (!post) return null;
 
-  const publishedTime = new Date(post.date).toISOString();
-  const modifiedTime = new Date(post.lastmod || post.date).toISOString();
+  const publishedTime = post ? new Date(post.date).toISOString() : '';
+  const modifiedTime = post ? new Date(post.lastmod || post.date).toISOString() : '';
 
   return genMetadata({
     title: post.title,

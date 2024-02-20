@@ -14,10 +14,11 @@ export const generateMetadata = async (
 ) => {
   const slug = params.slug;
   const label = TAGS.find((tag) => tag.slug === slug)?.label;
+  if (!label) return null;
 
   return genMetadata({
-    title: label ? `${label}に関する記事` : 'タグが見つかりません',
-    description: label ? `${label}に関する記事の一覧ページです。` : `タグが見つかりません。`,
+    title: `${label}に関する記事`,
+    description: `${label}に関する記事の一覧ページです。`,
     parent,
   });
 };
