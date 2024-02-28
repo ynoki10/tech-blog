@@ -13,7 +13,7 @@ export default function ArticleCard(post: Article) {
     <article>
       <h2 className="text-lg md:text-xl">
         <Link
-          className="text-blue-700 hover:text-blue-900 dark:text-blue-400"
+          className="text-blue-700 hover:text-blue-900 dark:text-blue-300 dark:hover:text-blue-200"
           href={`/articles/${post.slug}`}
         >
           {post.title}
@@ -28,7 +28,7 @@ export default function ArticleCard(post: Article) {
           ))}
         </ul>
       )}
-      <time className="mt-1 block text-xs text-gray-600" dateTime={post.date}>
+      <time className="mt-1 block text-xs text-gray-600 dark:text-gray-400" dateTime={post.date}>
         {format(parseISO(post.date), 'LLLL d, yyyy')}
       </time>
     </article>

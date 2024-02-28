@@ -6,7 +6,7 @@ import type { Config } from 'tailwindcss';
 
 export default {
   content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,tsx}', './data/**/*.mdx'],
-  darkMode: 'class',
+  // darkMode: 'class',
   theme: {
     extend: {
       lineHeight: {

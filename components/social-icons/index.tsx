@@ -19,13 +19,13 @@ export default function SocialIcon({ kind, href }: SocialIconProps) {
 
   return (
     <a
-      className="text-sm text-gray-500 transition hover:text-gray-600"
+      className="text-sm text-gray-500 transition hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
       href={href}
       rel="noopener noreferrer"
       target="_blank"
     >
       <span className="sr-only">{kind}</span>
-      <SocialSvg className={`size-6 fill-current text-gray-700 hover:text-gray-600`} />
+      <SocialSvg className={`size-6 fill-current`} />
     </a>
   );
 }

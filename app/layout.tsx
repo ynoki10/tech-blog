@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className={`scroll-smooth`} lang="ja">
-      <body className="break-words bg-white text-black antialiased">
+      <body className="break-words bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
         <div className="flex min-h-screen flex-col justify-between">
           <Header />
           <main className="mx-auto mb-auto w-full max-w-3xl px-4 pt-8 sm:px-6 sm:pt-12 md:pt-16">

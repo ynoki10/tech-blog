@@ -10,7 +10,7 @@ import siteMetadata from '@/data/siteMetadata';
 export default function HeaderTitle() {
   const pathname = usePathname();
   const isHome = pathname === '/';
-  const cssClasses = 'text-xl font-semibold md:text-2xl';
+  const cssClasses = 'text-xl font-semibold md:text-2xl dark:text-gray-200';
 
   return (
     <Link className="flex items-center" href="/">

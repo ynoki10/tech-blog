@@ -57,25 +57,25 @@ export default function Page({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <article className="divide-y divide-gray-400">
+    <article className="divide-y divide-gray-400 dark:divide-gray-500">
       <header className="space-y-1 pb-2 md:space-y-2 md:pb-4">
         <time
-          className="text-sm font-medium leading-6 text-gray-500 md:text-base"
+          className="text-sm font-medium leading-6 text-gray-500 md:text-base dark:text-gray-400"
           dateTime={post.date}
         >
           {format(parseISO(post.date), 'LLLL d, yyyy')}
         </time>
         <PageTitle>{post.title}</PageTitle>
       </header>
-      <div className="space-y-8 divide-y divide-gray-200 pt-8">
-        <div className="prose max-w-none">
+      <div className="space-y-8 divide-y divide-gray-200 pt-8 dark:divide-gray-700">
+        <div className="prose max-w-none dark:prose-invert">
           <MDXRenderer code={post.body.code} />
         </div>
         <footer className="space-y-8 pt-8">
           <div>
             {postTags && (
               <div>
-                <h2 className="text-xl tracking-wide text-gray-900">Tags</h2>
+                <h2 className="text-xl tracking-wide text-gray-900 dark:text-gray-200">Tags</h2>
                 <ul className="mt-2 flex flex-wrap gap-3">
                   {postTags.map((tag) => (
                     <li key={tag.slug}>
@@ -87,7 +87,10 @@ export default function Page({ params }: { params: { slug: string } }) {
             )}
           </div>
           <div>
-            <Link className="text-primary-500 hover:text-primary-600" href="/">
+            <Link
+              className="text-primary-600 hover:text-primary-700 dark:text-primary-500 dark:hover:text-primary-400"
+              href="/"
+            >
               <span aria-hidden="true">&larr;</span> 記事一覧へ戻る
             </Link>
           </div>

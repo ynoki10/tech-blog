@@ -8,7 +8,7 @@ interface Props {
 export default function Tag({ slug, label }: Props) {
   return (
     <Link
-      className="text-sm font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+      className="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-500 dark:hover:text-primary-400"
       href={`/tags/${slug}`}
     >
       {label}
