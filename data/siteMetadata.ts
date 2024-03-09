@@ -7,7 +7,6 @@ const siteMetadata = {
   profile:
     'マークアップ&フロントエンドエンジニア。Web制作会社で主にコーポレートサイトを作っています。最近はアクセシビリティとモダンフロントエンド、Jamstackなどを勉強中。京都に住んでいます🦆',
   language: 'ja-jp',
-  theme: 'system',
   siteUrl: 'https://www.yoshinoki.dev',
   siteRepo: 'https://github.com/ynoki10/tech-blog',
   siteLogo: '/static/images/logo.png',
