@@ -5,7 +5,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-export default function ColorThemeSelector() {
+const ColorThemeSelector = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, resolvedTheme, themes, setTheme } = useTheme();
 
@@ -66,4 +66,6 @@ export default function ColorThemeSelector() {
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
   );
-}
+};
+
+export default ColorThemeSelector;

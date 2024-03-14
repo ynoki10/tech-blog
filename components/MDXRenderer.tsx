@@ -14,8 +14,10 @@ const components: MDXComponents = {
   ),
 };
 
-export default function MDXRenderer({ code }: { code: string }) {
+const MDXRenderer = ({ code }: { code: string }) => {
   const Mdx = useMDXComponent(code);
 
   return <Mdx components={components} />;
-}
+};
+
+export default MDXRenderer;

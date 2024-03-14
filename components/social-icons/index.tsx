@@ -12,7 +12,7 @@ type SocialIconProps = {
   size?: number;
 };
 
-export default function SocialIcon({ kind, href }: SocialIconProps) {
+const SocialIcon = ({ kind, href }: SocialIconProps) => {
   if (!href) return null;
 
   const SocialSvg = components[kind];
@@ -28,4 +28,5 @@ export default function SocialIcon({ kind, href }: SocialIconProps) {
       <SocialSvg className={`size-6 fill-current`} />
     </a>
   );
-}
+};
+export default SocialIcon;

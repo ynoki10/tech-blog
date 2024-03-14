@@ -28,7 +28,7 @@ export const generateStaticParams = () => {
   return paths;
 };
 
-export default function TagPage({ params }: { params: { slug: string } }) {
+const TagPage = ({ params }: { params: { slug: string } }) => {
   const slug = params.slug;
   const tag = TAGS.find((tag) => tag.slug === slug);
   if (!tag) return notFound();
@@ -47,4 +47,6 @@ export default function TagPage({ params }: { params: { slug: string } }) {
       </ul>
     </>
   );
-}
+};
+
+export default TagPage;

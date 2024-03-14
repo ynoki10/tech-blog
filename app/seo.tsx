@@ -12,7 +12,7 @@ type SEOProps = {
   ogModifiedTime?: string;
 };
 
-export async function genMetadata({
+export const genMetadata = async ({
   title,
   description,
   ogType = 'article',
@@ -20,7 +20,7 @@ export async function genMetadata({
   parent,
   ogPublishedTime,
   ogModifiedTime,
-}: SEOProps): Promise<Metadata> {
+}: SEOProps): Promise<Metadata> => {
   const parentMetadata = await parent;
   const parentOgImages = parentMetadata.openGraph?.images;
   const parentTwitterImages = parentMetadata.twitter?.images;
@@ -52,4 +52,4 @@ export async function genMetadata({
       ...(parentTwitterImages && { images: parentTwitterImages }),
     },
   };
-}
+};

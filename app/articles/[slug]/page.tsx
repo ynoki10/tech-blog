@@ -43,7 +43,7 @@ export const generateStaticParams = () => {
   return paths;
 };
 
-export default function Page({ params }: { params: { slug: string } }) {
+const Page = ({ params }: { params: { slug: string } }) => {
   const slug = params.slug;
   const sortedArticles = allArticles.sort((a, b) =>
     compareDesc(new Date(a.date), new Date(b.date)),
@@ -60,7 +60,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     <article className="divide-y divide-gray-400 dark:divide-gray-500">
       <header className="space-y-1 pb-2 md:space-y-2 md:pb-4">
         <time
-          className="text-sm font-medium leading-6 text-gray-500 md:text-base dark:text-gray-400"
+          className="text-sm font-medium leading-6 text-gray-500 dark:text-gray-400 md:text-base"
           dateTime={post.date}
         >
           {format(parseISO(post.date), 'LLLL d, yyyy')}
@@ -98,4 +98,6 @@ export default function Page({ params }: { params: { slug: string } }) {
       </div>
     </article>
   );
-}
+};
+
+export default Page;

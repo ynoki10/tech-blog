@@ -1,6 +1,6 @@
 {
   "root": true,
-  "plugins": ["unused-imports", "strict-dependencies"],
+  "plugins": ["unused-imports", "strict-dependencies", "prefer-arrow-functions"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended-type-checked",
@@ -69,6 +69,18 @@
       ],
       {
         "resolveRelativeImport": true
+      }
+    ],
+    // アロー関数の使用を強制する
+    "arrow-body-style": ["error", "as-needed"],
+    "func-style": "error",
+    "prefer-arrow-functions/prefer-arrow-functions": [
+      "error",
+      {
+        "classPropertiesAllowed": false,
+        "disallowPrototype": false,
+        "returnStyle": "unchanged",
+        "singleReturnOnly": false
       }
     ]
   }

@@ -45,25 +45,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html className={`scroll-smooth`} lang="ja" suppressHydrationWarning>
-      <body className="break-words bg-white text-black dark:bg-gray-950 dark:text-white">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          disableTransitionOnChange
-          enableSystem
-        >
-          <div className="flex min-h-screen flex-col justify-between">
-            <Header />
-            <main className="mx-auto mb-auto w-full max-w-3xl px-4 pt-8 sm:px-6 sm:pt-12 md:pt-16">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </ThemeProvider>
-      </body>
-    </html>
-  );
-}
+const RootLayout = ({ children }: { children: React.ReactNode }) => (
+  <html className={`scroll-smooth`} lang="ja" suppressHydrationWarning>
+    <body className="break-words bg-white text-black dark:bg-gray-950 dark:text-white">
+      <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
+        <div className="flex min-h-screen flex-col justify-between">
+          <Header />
+          <main className="mx-auto mb-auto w-full max-w-3xl px-4 pt-8 sm:px-6 sm:pt-12 md:pt-16">
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </ThemeProvider>
+    </body>
+  </html>
+);
+
+export default RootLayout;

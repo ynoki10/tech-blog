@@ -6,7 +6,7 @@ import Tag from '@/components/Tag';
 import { TAGS } from '@/data/tags';
 import { Article } from 'contentlayer/generated';
 
-export default function ArticleCard(post: Article) {
+const ArticleCard = (post: Article) => {
   const postTags = TAGS.filter((tag) => post.tags?.includes(tag.label));
 
   return (
@@ -33,4 +33,6 @@ export default function ArticleCard(post: Article) {
       </time>
     </article>
   );
-}
+};
+
+export default ArticleCard;

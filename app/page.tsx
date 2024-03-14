@@ -4,7 +4,7 @@ import ArticleCard from '@/components/ArticleCard';
 
 import { allArticles } from 'contentlayer/generated';
 
-export default function Home() {
+const Home = () => {
   const posts = allArticles
     .filter((p) => !p.draft)
     .sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)));
@@ -18,4 +18,6 @@ export default function Home() {
       ))}
     </ul>
   );
-}
+};
+
+export default Home;
