@@ -61,22 +61,22 @@ export const Article = defineDocumentType(() => ({
 }));
 
 // 記事のタグがタグ一覧に存在するかチェックする
-function checkTagExistence(articles: ArticleType[]) {
+const checkTagExistence = (articles: ArticleType[]) => {
   const allTags = articles.flatMap((article) => article.tags);
   const uniqueTags = Array.from(new Set(allTags));
   const invalidTags = uniqueTags.filter((tag) => !TAGS.map((tag) => tag.label).includes(tag));
   if (invalidTags.length > 0) {
     throw new Error(`Invalid tags found: ${invalidTags.join(', ')}`);
   }
-}
+};
 
-function createTagCount(articles: ArticleType[]) {
+const createTagCount = (articles: ArticleType[]) => {
   const tagsWithCount = TAGS.map((tag) => {
     const count = articles.filter((article) => article.tags.includes(tag.label)).length;
     return { ...tag, count };
   });
   writeFileSync('./app/tag-data.json', `${JSON.stringify(tagsWithCount, null, 2)}\n`);
-}
+};
 
 export default makeSource({
   contentDirPath: 'data',
