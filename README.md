@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## npm-scripts
 
-## Getting Started
+| Script     | Description                                       |
+| ---------- | ------------------------------------------------- |
+| dev        | Next.js を開発モードで実行                        |
+| build      | プロジェクトのビルド                              |
+| start      | Next.js の本番サーバーを起動                      |
+| lint       | ESLintの実行                                      |
+| lint:fix   | ESLintを実行し、可能な箇所は修正する              |
+| prettier   | Prettierでファイルをフォーマットする              |
+| markuplint | Markuplintで.ts .tsx のマークアップをチェックする |
+| secretlint | 秘匿情報が含まれていないかチェックする            |
 
-First, run the development server:
+## 記事の設定
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- `data/articles`に.mdxファイルを追加する
+- ファイル名がslugに使用される
+- Frontmatterの設定は次の通り
+
+```
+---
+title: ◯◯を使ってxxする方法          // タイトル
+date: 2024-01-30                  // 投稿日
+summary: ◯◯を使ってxxする方法を紹介。 // description
+tags:                             // タグを指定（複数指定可・slugではなくlabelを使う）
+  - HTML
+  - CSS
+draft: true                       // 下書き指定（記載しなければ通常公開）
+---
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## タグの設定
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`data/tags.ts`で定義
