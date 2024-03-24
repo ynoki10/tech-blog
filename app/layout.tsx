@@ -1,7 +1,8 @@
+import { ThemeProvider } from 'next-themes';
+
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
-import ThemeProvider from '@/app/theme-providers';
 import siteMetadata from '@/data/siteMetadata';
 import '@/css/tailwind.css';
 
