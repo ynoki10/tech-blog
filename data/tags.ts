@@ -7,6 +7,7 @@ export const TAGS = [
   { label: 'WordPress', slug: 'wordpress' },
   { label: 'Tailwind CSS', slug: 'tailwind' },
   { label: 'TypeScript', slug: 'typescript' },
+  { label: 'アイデア', slug: 'idea' },
 ] as const;
 
 export type Tag = (typeof TAGS)[number];
