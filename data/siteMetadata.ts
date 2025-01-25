@@ -5,7 +5,7 @@ const siteMetadata = {
 	description:
 		'Yoshinokiの技術ブログです。主にフロントエンドの技術やアクセシビリティについて、調べたことや学んだことを雑多にまとめています。',
 	profile:
-		'マークアップ&フロントエンドエンジニア。最近はアクセシビリティとFigma、Astroなどを勉強中。京都に住んでいます🦆',
+		'マークアップ&フロントエンドエンジニア。最近はアクセシビリティとFigma、Astroなどを勉強中。滋賀県に住んでいます🦆',
 	language: 'ja-jp',
 	siteUrl: 'https://www.yoshinoki.dev',
 	siteRepo: 'https://github.com/ynoki10/tech-blog',
