@@ -6,18 +6,18 @@ import Link from '@/components/Link';
 import type { MDXComponents } from 'mdx/types';
 
 const components: MDXComponents = {
-  Image,
-  a: ({ href, children, ...rest }) => (
-    <Link href={href as string} {...rest}>
-      {children}
-    </Link>
-  ),
+	Image,
+	a: ({ href, children, ...rest }) => (
+		<Link href={href as string} {...rest}>
+			{children}
+		</Link>
+	),
 };
 
 const MDXRenderer = ({ code }: { code: string }) => {
-  const Mdx = useMDXComponent(code);
+	const Mdx = useMDXComponent(code);
 
-  return <Mdx components={components} />;
+	return <Mdx components={components} />;
 };
 
 export default MDXRenderer;

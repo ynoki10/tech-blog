@@ -8,31 +8,31 @@ import tagData from '@/app/tag-data.json';
 import { TagsWithCount } from '@/data/tags';
 
 export const generateMetadata = async (_: never, parent: ResolvingMetadata) =>
-  genMetadata({
-    title: 'タグ一覧',
-    description: 'ブログ内のタグの一覧ページです。',
-    parent,
-  });
+	genMetadata({
+		title: 'タグ一覧',
+		description: 'ブログ内のタグの一覧ページです。',
+		parent,
+	});
 
 const Page = () => {
-  const tags = tagData as TagsWithCount;
-  const sortedTags = tags.filter((tag) => tag.count !== 0).sort((a, b) => b.count - a.count);
-  return (
-    <>
-      <PageTitle>タグ一覧</PageTitle>
-      <ul className="flex flex-wrap gap-x-6 gap-y-2 pt-8 md:gap-y-4">
-        {sortedTags.map((tag) => (
-          <li key={tag.slug}>
-            <Tag label={tag.label} slug={tag.slug} />
-            <span className="ml-2 inline-block">
-              ({tag.count}
-              <span className="sr-only">件の記事</span>)
-            </span>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
+	const tags = tagData as TagsWithCount;
+	const sortedTags = tags.filter((tag) => tag.count !== 0).sort((a, b) => b.count - a.count);
+	return (
+		<>
+			<PageTitle>タグ一覧</PageTitle>
+			<ul className="flex flex-wrap gap-x-6 gap-y-2 pt-8 md:gap-y-4">
+				{sortedTags.map((tag) => (
+					<li key={tag.slug}>
+						<Tag label={tag.label} slug={tag.slug} />
+						<span className="ml-2 inline-block">
+							({tag.count}
+							<span className="sr-only">件の記事</span>)
+						</span>
+					</li>
+				))}
+			</ul>
+		</>
+	);
 };
 
 export default Page;

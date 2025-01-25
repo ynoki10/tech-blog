@@ -1,87 +1,87 @@
 {
-  "root": true,
-  "plugins": ["unused-imports", "strict-dependencies", "prefer-arrow-functions"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "next/core-web-vitals",
-    "plugin:tailwindcss/recommended",
-    "prettier"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
-  "ignorePatterns": ["next.config.js"],
-  "rules": {
-    "react/jsx-sort-props": "error",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" } // _ で始まる変数は未使用でもエラーにしない
-    ],
-    "unused-imports/no-unused-vars": "off", // 未使用の変数は @typescript-eslint/no-unused-vars でチェックするため無効化
-    "unused-imports/no-unused-imports": "error", // 未使用の import をエラーにする
-    // import の順序を設定する
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          ["parent", "sibling", "index"],
-          "object",
-          "type"
-        ],
-        "newlines-between": "always",
-        "pathGroupsExcludedImportTypes": ["builtin"],
-        "pathGroups": [
-          {
-            "pattern": "@/components/**",
-            "group": "internal",
-            "position": "before"
-          },
-          {
-            "pattern": "@/types/**",
-            "group": "internal",
-            "position": "before"
-          }
-        ],
-        "alphabetize": {
-          "order": "asc"
-        }
-      }
-    ],
-    // import先を制限する
-    "strict-dependencies/strict-dependencies": [
-      "error",
-      [
-        {
-          "module": "next/link",
-          "allowReferenceFrom": ["components/Link.tsx"],
-          "allowSameModule": false
-        },
-        {
-          "module": "next/image",
-          "allowReferenceFrom": ["components/Image.tsx"],
-          "allowSameModule": false
-        }
-      ],
-      {
-        "resolveRelativeImport": true
-      }
-    ],
-    // アロー関数の使用を強制する
-    "arrow-body-style": ["error", "as-needed"],
-    "func-style": "error",
-    "prefer-arrow-functions/prefer-arrow-functions": [
-      "error",
-      {
-        "classPropertiesAllowed": false,
-        "disallowPrototype": false,
-        "returnStyle": "unchanged",
-        "singleReturnOnly": false
-      }
-    ]
-  }
+	"root": true,
+	"plugins": ["unused-imports", "strict-dependencies", "prefer-arrow-functions"],
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended-type-checked",
+		"next/core-web-vitals",
+		"plugin:tailwindcss/recommended",
+		"prettier"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": "./tsconfig.json"
+	},
+	"ignorePatterns": ["next.config.js"],
+	"rules": {
+		"react/jsx-sort-props": "error",
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{ "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" } // _ で始まる変数は未使用でもエラーにしない
+		],
+		"unused-imports/no-unused-vars": "off", // 未使用の変数は @typescript-eslint/no-unused-vars でチェックするため無効化
+		"unused-imports/no-unused-imports": "error", // 未使用の import をエラーにする
+		// import の順序を設定する
+		"import/order": [
+			"error",
+			{
+				"groups": [
+					"builtin",
+					"external",
+					"internal",
+					["parent", "sibling", "index"],
+					"object",
+					"type"
+				],
+				"newlines-between": "always",
+				"pathGroupsExcludedImportTypes": ["builtin"],
+				"pathGroups": [
+					{
+						"pattern": "@/components/**",
+						"group": "internal",
+						"position": "before"
+					},
+					{
+						"pattern": "@/types/**",
+						"group": "internal",
+						"position": "before"
+					}
+				],
+				"alphabetize": {
+					"order": "asc"
+				}
+			}
+		],
+		// import先を制限する
+		"strict-dependencies/strict-dependencies": [
+			"error",
+			[
+				{
+					"module": "next/link",
+					"allowReferenceFrom": ["components/Link.tsx"],
+					"allowSameModule": false
+				},
+				{
+					"module": "next/image",
+					"allowReferenceFrom": ["components/Image.tsx"],
+					"allowSameModule": false
+				}
+			],
+			{
+				"resolveRelativeImport": true
+			}
+		],
+		// アロー関数の使用を強制する
+		"arrow-body-style": ["error", "as-needed"],
+		"func-style": "error",
+		"prefer-arrow-functions/prefer-arrow-functions": [
+			"error",
+			{
+				"classPropertiesAllowed": false,
+				"disallowPrototype": false,
+				"returnStyle": "unchanged",
+				"singleReturnOnly": false
+			}
+		]
+	}
 }
