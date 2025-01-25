@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from 'next-themes';
 
 import Footer from '@/components/Footer';
@@ -58,6 +59,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
 					<Footer />
 				</div>
 			</ThemeProvider>
+			<Analytics />
 		</body>
 	</html>
 );
