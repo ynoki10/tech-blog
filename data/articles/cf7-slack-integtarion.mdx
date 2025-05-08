@@ -1,0 +1,174 @@
+---
+title: Contact Form 7からSlackへフォーム内容を通知する
+date: 2025-05-08
+summary: WordPressのフォームプラグインContact Form 7からSlackへフォーム内容を通知する方法を紹介しています。
+tags:
+  - WordPress
+  - Slack
+---
+
+## はじめに
+
+この記事ではWordPressのフォームプラグイン Contact Form 7（以下CF7）で作成されたフォームの送信内容をSlackの特定チャンネルへ通知する方法を紹介します。
+
+先日、業務の中で「サイトのフォームから送信された内容をSlackに通知したい」という要望が出てきました。これを受けて私が実装した内容を解説していきます。
+
+できるだけシンプルに実装したかったので、プラグインやZapierなどの外部サービスには頼らず、CF7のカスタムフックとSlack AppのIncoming Webhooksを利用して実装しました。
+
+## Slack側の準備
+
+Slack に外部アプリからメッセージを投稿するには Slack アプリ を作成して Incoming Webhooks を有効化します。
+
+なお、過去に一般的に利用されていた[Custom IntegrationsのIncoming Webhooks](https://api.slack.com/legacy/custom-integrations#incoming-webhooks)は現在非推奨となっているのでご注意ください。
+
+では早速Slackアプリを作成してWebhook URLを発行していきましょう。Slackアプリは[公式ドキュメント](https://api.slack.com/messaging/webhooks)を参考に簡単に作成可能です。
+
+なお、あらかじめSlackにテスト用チャンネルを作っておくと、誤送信を気にせず動作確認できて便利です。
+
+### Slackアプリの作成手順
+
+#### 1. Slack アプリを作成
+
+https://api.slack.com/apps/new にアクセスし、アプリ名と投稿先のワークスペースを選択して Create App をクリックします。
+
+#### 2. Incoming Webhooks を有効化
+
+アプリ管理画面に遷移するのでメニューから **Incoming Webhooks** を開き、**Activate Incoming Webhooks**のトグルをONにします。
+
+#### 3. Webhook URL を発行
+
+設定画面が表示されるので、**Add New Webhook to Workspace** をクリックし、投稿したいチャンネルを選択して **Authorize** をクリック。
+
+`https://hooks.slack.com/services/...` 形式の URL が表示されるのでコピーしておきます。
+
+**重要:** Webhook URL はチャンネルへの「秘密鍵」に相当します。GitHub などの公開リポジトリに置かないよう環境変数で管理しましょう。後ほど例を挙げて詳しく説明します。
+
+上記の手順で発行したURLに以下のようなPOSTリクエストを送信すると該当のチャンネルに新たな投稿が追加されるようになっています。
+
+```jsx
+POST https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+Content-type: application/json
+{
+    "text": "Hello, world."
+}
+```
+
+メッセージに表示されるアプリの名前やアイコンなどはアプリの管理画面から自由に設定可能です。
+
+## **Contact Form 7 にフックを追加する**
+
+### フォーム例
+
+CF7 のフォームは自由に設計できますが、ここでは以下のようなシンプルな問い合わせフォームを例に進めます。
+
+```
+<label>お名前（必須）
+  [text* your-name placeholder="例：山田太郎"]
+</label>
+
+<label>メールアドレス（必須）
+  [email* your-email placeholder="例：example@example.com"]
+</label>
+
+<label>お問い合わせ内容（必須）
+  [textarea* your-message placeholder="お問い合わせ内容をご入力ください"]
+</label>
+
+[submit "送信"]
+```
+
+### `wpcf7_mail_sent` フックで Slack へ投稿
+
+CF7 にはメール送信後に任意の処理を差し込める `wpcf7_mail_sent` アクションがあります。`functions.php` に次のコードを追加すると、指定フォームが送信されたタイミングで Slack にメッセージを送れます。
+
+```
+/**
+ * 指定フォーム送信後に Slack へ投稿
+ */
+add_action( 'wpcf7_mail_sent', function ( $contact_form ) {
+
+	// 対象フォーム ID
+	$target_form_id = 123;
+	if ( intval( $contact_form->id() ) !== $target_form_id ) {
+		return;
+	}
+
+	// 送信データ取得
+	$submission = WPCF7_Submission::get_instance();
+	if ( ! $submission ) {
+		return;
+	}
+	$posted_data = $submission->get_posted_data();
+
+	$name    = esc_html( $posted_data['your-name'] ?? '' );
+	$email   = esc_html( $posted_data['your-email'] ?? '' );
+	$message = esc_html( $posted_data['your-message'] ?? '' );
+
+	// Slack へ送るペイロード（Block Kit）
+	$payload = [
+		'blocks' => [
+			[
+				'type' => 'section',
+				'text' => [
+					'type' => 'mrkdwn',
+					'text' => "*お名前*: {$name}\n*メールアドレス*: {$email}\n*お問い合わせ内容*: {$message}"
+				],
+			],
+		],
+	];
+
+	// HTTP リクエスト
+	$response = wp_remote_post(
+		CF7_SLACK_WEBHOOK_URL,
+		[
+			'headers'     => [ 'Content-Type' => 'application/json; charset=utf-8' ],
+			'body'        => wp_json_encode( $payload ),
+			'data_format' => 'body',
+			'timeout'     => 5,
+		]
+	);
+
+	// エラーハンドリング
+	if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) >= 400 ) {
+		error_log(
+			sprintf(
+				'[CF7→Slack] 送信失敗 (%s): %s',
+				wp_remote_retrieve_response_code( $response ),
+				is_wp_error( $response ) ? $response->get_error_message() : wp_remote_retrieve_body( $response )
+			)
+		);
+	}
+} );
+```
+
+[text formatting](https://api.slack.com/reference/surfaces/formatting)や[Block Kit](https://api.slack.com/messaging/webhooks#advanced_message_formatting:~:text=text%20formatting%20and-,Block%20Kit,-to%20make%20your)を使うことでメッセージの装飾や添付も柔軟にカスタマイズ可能です。詳細は[公式ドキュメント](https://api.slack.com/messaging/webhooks#advanced_message_formatting)を確認してください。
+
+### Webhook URL は環境変数で管理
+
+Webhook URL をソースにハードコードすると漏えいリスクがあります。`.env` などで `CF7_SLACK_WEBHOOK_URL` を定義し、`wp-config.php` で読み込む方法が安全です。
+
+**.env**
+
+```
+CF7_SLACK_WEBHOOK_URL="https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXX"
+```
+
+**wp-config.php**
+
+```
+if ( ! defined( 'CF7_SLACK_WEBHOOK_URL' ) ) {
+	define( 'CF7_SLACK_WEBHOOK_URL', getenv( 'CF7_SLACK_WEBHOOK_URL' ) ?: '' );
+}
+```
+
+環境変数を使えば、開発環境ではテストチャンネル、本番では本番チャンネル、といった切り替えも容易です。
+
+## まとめ
+
+Contact Form 7で作成されたフォームの送信内容をSlackの特定チャンネルへ通知する方法を紹介しました。
+
+- **Slackアプリ**でIncoming Webhooksを有効化し、Webhook URLを取得
+- CF7の`wpcf7_mail_sent`アクションでフォーム送信後にHTTP POST
+- **環境変数**でWebhook URLを安全に管理
+
+ぜひチームの運用フローに合わせて活用してみてください。
