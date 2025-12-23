@@ -9,6 +9,7 @@ export const TAGS = [
 	{ label: 'TypeScript', slug: 'typescript' },
 	{ label: 'アイデア', slug: 'idea' },
 	{ label: 'Slack', slug: 'slack' },
+	{ label: '読書メモ', slug: 'reading-notes' },
 ] as const;
 
 export type Tag = (typeof TAGS)[number];
